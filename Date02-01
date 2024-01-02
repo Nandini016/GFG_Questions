@@ -1,0 +1,25 @@
+class Solution {
+    
+    public long maxSumWithK(long a[], long n, long k)
+    {
+        int sum=0,max=0,prev=0;
+        int i=0,j=0;
+        while(i<k){
+            sum+=a[i++];
+            max=sum;
+        }
+        while(i<n){
+            sum+=a[i++];
+            prev +=a[j++];
+            max=Math.max(max,sum);
+            
+            if(prev<0){
+            sum =sum-prev;
+            prev=0;
+            max=Math.max(sum,max);
+        }
+        }
+        return max;
+        
+    }
+}
