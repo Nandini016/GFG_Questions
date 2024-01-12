@@ -1,0 +1,15 @@
+ int n=q.size();
+        int rem = n - k;
+        Stack<Integer> s = new Stack<>();
+        while(k>0){
+            s.push(q.poll()); //q.front() -> q.pop()
+            k--;
+        }
+        while(!s.isEmpty()){
+            q.offer(s.pop()); //q.push()
+        }
+        while(rem>0){
+            q.offer(q.poll());
+            rem--;
+        }
+        return q;
