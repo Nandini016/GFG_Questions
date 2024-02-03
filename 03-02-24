@@ -1,0 +1,14 @@
+class Solution
+{
+   long DecimalValue(Node head)
+   {
+       long ans =0;
+ 	 int mod =1000000007;
+    while(head!=null){
+        ans=(ans*2+head.data)%mod;
+        head=head.next;
+    }
+    return ans;
+ 	
+   }
+
