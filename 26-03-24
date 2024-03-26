@@ -1,0 +1,54 @@
+class Solution {
+    public boolean isAdditiveSequence(String n) {
+        for (int i = 0; i < n.length() / 2; i++) {
+            for (int j = i + 1; j < n.length() - 1; j++) {
+                String a = n.substring(0, i + 1);
+                String b = n.substring(i + 1, j + 1);
+                String c = n.substring(j + 1);
+                if (isValid(a, b, c)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isValid(String a, String b, String c) {
+        if ((a.length() > 1 && a.charAt(0) == '0') || (b.length() > 1 && b.charAt(0) == '0')) {
+            // Numbers with leading zeros are not valid
+            return false;
+        }
+
+        String sum = findSum(a, b);
+        if (sum.equals(c)) {
+            return true;
+        }
+        if (c.length() <= sum.length() || !c.substring(0, sum.length()).equals(sum)) {
+            return false;
+        }
+        return isValid(b, sum, c.substring(sum.length()));
+    }
+
+    private String findSum(String a, String b) {
+        int i = a.length() - 1, j = b.length() - 1;
+        StringBuilder ans = new StringBuilder();
+        int carry = 0;
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (i >= 0) {
+                sum += a.charAt(i) - '0';
+                i--;
+            }
+            if (j >= 0) {
+                sum += b.charAt(j) - '0';
+                j--;
+            }
+            ans.append((char) (sum % 10 + '0'));
+            carry = sum / 10;
+        }
+        if (carry != 0) {
+            ans.append((char) (carry + '0'));
+        }
+        return ans.reverse().toString();
+    }
+}
