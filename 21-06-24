@@ -1,0 +1,69 @@
+class Solution {
+
+    String compareFrac(String str) {
+        // Code here
+       Integer x = 0;
+       Integer y = 0;
+       
+       Integer x2 = 0;
+       Integer y2 = 0;
+   
+       int n = str.length();
+       for(int i = 0; i < n; i++)
+       {
+           while(i < n && Character.isDigit(str.charAt(i)))
+           {
+               x = x*10 + (str.charAt(i) - '0');
+               i++;
+           }
+           i++;
+           while(i < n && Character.isDigit(str.charAt(i)))
+           {
+               y = y*10 + (str.charAt(i) - '0');
+               i++;
+           }
+           i++;
+           i++;
+           while(i < n && Character.isDigit(str.charAt(i)))
+           {
+               x2 = x2*10 + (str.charAt(i) - '0');
+               i++;
+           }
+           i++;
+           while(i < n && Character.isDigit(str.charAt(i)))
+           {
+               y2 = y2*10 + (str.charAt(i) - '0');
+               i++;
+           }
+           i++;
+       }
+     
+      Double res1 = (double)x/y;
+      Double res2 = (double)x2/y2;
+      
+      int res = Double.compare(res1,res2);
+     
+      if(res == 0)
+      {
+          return "equal";
+      }
+      if(res > 0)
+      {
+          String str2 = new String("");
+          
+          str2 += x.toString();
+          str2 += "/";
+          str2 += y.toString();
+          
+          return str2;
+      }
+      
+      String str3 = new String("");
+          
+      str3 += x2.toString();
+      str3 += "/";
+      str3 += y2.toString();
+          
+      return str3;
+    }
+}
